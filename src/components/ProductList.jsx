@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const retriveProduct = async () => {
-  const response = await axios.get("http://localhost:3000/products");
+const retriveProduct = async ({ queryKey }) => {
+  const response = await axios.get(`http://localhost:3000/${queryKey[0]}`);
   return response.data;
 };
 
 const ProductList = () => {
   const {
-    data: productList,
+    data: products,
     error,
     isLoading,
   } = useQuery({
@@ -19,14 +19,22 @@ const ProductList = () => {
   if (error) return <div>An error occured : {error.message}</div>;
 
   return (
-    <div className='flex flex-col justify-center items-center w-3/5'>
-      <h1 className='text-3xl my-1'>ProductList</h1>
-      <ul>
-        {productList &&
-          productList.map((product) => (
-            <li key={product.id}>
-              <img src={product.thumbnail} alt={product.title} />
-              <p>{product.title}</p>
+    <div className='flex flex-col justify-center items-center'>
+      <h1 className='text-3xl my-2'>Product List</h1>
+      <ul className='flex flex-wrap justify-center items-center'>
+        {products &&
+          products.map((product) => (
+            <li
+              key={product.id}
+              className='flex flex-col items-center m-2 border rounded-sm'
+            >
+              <img
+                src={product.thumbnail}
+                alt={product.title}
+                className='object-cover w-10 h-10'
+              />
+
+              <p className='text-3xl my-2'>{product.title}</p>
             </li>
           ))}
       </ul>

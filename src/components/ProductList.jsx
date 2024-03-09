@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const retriveProduct = async ({ queryKey }) => {
+const retriveProducts = async ({ queryKey }) => {
   const response = await axios.get(`http://localhost:3000/${queryKey[0]}`);
   return response.data;
 };
@@ -13,7 +13,7 @@ const ProductList = () => {
     isLoading,
   } = useQuery({
     queryKey: ["products"],
-    queryFn: retriveProduct,
+    queryFn: retriveProducts,
   });
   if (isLoading) return <div>Fetching data...</div>;
   if (error) return <div>An error occured : {error.message}</div>;
@@ -34,7 +34,10 @@ const ProductList = () => {
                 className='object-cover w-10 h-10'
               />
 
-              <p className='text-3xl my-2'>{product.title}</p>
+              <div>
+                <p className='text-3xl my-2'>{product.title}</p>
+                <button>show details</button>
+              </div>
             </li>
           ))}
       </ul>

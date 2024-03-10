@@ -63,7 +63,7 @@ const LoginForm = () => {
           </FieldSet>
           <div className='text-rose-500'>{errors?.root?.random?.message}</div>
           <Field>
-            <button className='w-1/4 text-lg border py-1 px-6 rounded-md cursor-pointer duration-300 bg-slate-700 text-white uppercase tracking-wide'>
+            <button className='w-1/4 text-lg border py-1 px-6 rounded-md cursor-pointer duration-300 bg-gray-500 text-white uppercase tracking-wide'>
               Login
             </button>
           </Field>

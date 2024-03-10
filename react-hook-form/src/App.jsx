@@ -1,9 +1,10 @@
-import LoginForm from "./forms/LoginForm";
+import RegistrationForm from "./forms/RegistrationForm";
 
 const App = () => {
   return (
     <div className=''>
-      <LoginForm />
+      <RegistrationForm />
+      {/* <LoginForm /> */}
     </div>
   );
 };

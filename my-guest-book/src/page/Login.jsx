@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { loginInWithEmailAndPassword } from "../firebase";
+import { loginInWithEmailAndPassword, signInWithGoogle } from "../firebase";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,6 +17,13 @@ const Login = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  /* handleSocialLogin */
+  const handleSocialLogin = async () => {
+    const user = await signInWithGoogle();
+    console.log(user);
+    navigate("/home");
   };
 
   return (
@@ -57,6 +64,13 @@ const Login = () => {
         >
           Login
         </button>
+        <button
+          className='mt-5 m-auto px-10 border py-2 rounded-md uppercase tracking-wider font-bold text-gray-500 hover:bg-gradient-to-r from-slate-600 to-slate-900 hover:text-gray-50 duration-500'
+          type='submit'
+          onClick={handleSocialLogin}
+        >
+          Sign In With Google
+        </button>
       </form>
       <p className='mt-4'>
         Don't have an account?{" "}
@@ -65,6 +79,15 @@ const Login = () => {
           to='/register'
         >
           Register
+        </NavLink>
+      </p>
+      <p className='mt-4'>
+        Forgot Password?{" "}
+        <NavLink
+          className='hover:underline duration-300 hover:text-rose-500'
+          to='/reset'
+        >
+          Reset Your Password
         </NavLink>
       </p>
     </div>
